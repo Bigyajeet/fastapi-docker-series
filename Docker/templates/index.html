@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Flask Multiplier</title>
+    <style>
+        /* Basic CSS for simple styling */
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        .container { width: 300px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        input[type="text"] { width: 90%; padding: 10px; margin: 5px 0 15px 0; border: 1px solid #ddd; border-radius: 4px; }
+        input[type="submit"] { background-color: #4CAF50; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
+        h1 { color: #333; }
+        .result { margin-top: 20px; padding: 10px; border: 2px solid #4CAF50; border-radius: 4px; background-color: #e6ffe6; font-size: 1.2em; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Flask Multiplication App ✖️</h1>
+
+        <form method="POST" action="/">
+            <label for="number_one">First Number:</label>
+            <input type="text" id="number_one" name="number_one" required>
+
+            <label for="number_two">Second Number:</label>
+            <input type="text" id="number_two" name="number_two" required>
+            
+            <input type="submit" value="Calculate Product">
+        </form>
+
+        {% if result is not none %}
+        <div class="result">
+            {# 
+               THE FIX IS HERE: We check if 'result' is a string AND 
+               if it contains the word "Error". This prevents the TypeError. 
+            #}
+            {% if result is string and "Error" in result %}
+                <p style="color: red;">{{ result }}</p>
+            {% else %}
+                {# If it's not an error string, it must be the calculated integer result #}
+                <p>Result: {{ result }}</p>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
